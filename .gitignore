@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables
+.env
+*.env
+config.py
+
+# Instance folder (contains runtime-generated files)
+instance/
+
+# Logs and debug files
+*.log
+logs/
+debug.log
+
+# Database files
+*.sqlite3
+*.db
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Pytest and coverage
+.coverage
+htmlcov/
+*.cover
+*.pyc
+*.pyo
+*.pyd
+.cache
+nosetests.xml
+coverage.xml
+*.pytest_cache
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Deploy-related files
+*.bak
+.DS_Store
+Thumbs.db

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Bot - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #1a1a1a; color: #e0e0e0; }
+        .box { background: #2c2c2c; border-radius: 10px; padding: 20px; }
+        .btn { background: #444; color: #fff; border-radius: 8px; padding: 10px; transition: 0.3s; }
+        .btn:hover { background: #666; }
+        input, button { outline: none; }
+    </style>
+</head>
+<body class="font-sans p-4">
+    <nav class="bg-black text-white p-4 rounded-lg flex flex-wrap justify-between items-center shadow-lg">
+        <div class="flex justify-between w-full md:w-auto">
+            <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram" class="h-8">
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="menu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto items-start md:items-center mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
+            <span><i class="fas fa-user text-gray-400"></i> @{{ username }}</span>
+            <span><i class="fas fa-chart-bar text-gray-400"></i> Actions: {{ action_count }}</span>
+            <a href="{{ url_for('logout') }}" class="btn"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+    <div class="container mx-auto py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-heart"></i> Like Posts by Hashtag</h2>
+            <form data-task-form data-task-endpoint="like_hashtag" class="mt-4 space-y-2">
+                <input type="text" name="hashtag" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Enter hashtag" required>
+                <input type="number" name="count" class="w-full p-2 rounded bg-gray-700 text-white" value="5" min="1" max="10">
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-user-plus"></i> Follow Followers of Target</h2>
+            <form data-task-form data-task-endpoint="follow_followers" class="mt-4 space-y-2">
+                <input type="text" name="target" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Target username" required>
+                <input type="number" name="limit" class="w-full p-2 rounded bg-gray-700 text-white" value="5" min="1" max="10">
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-user-minus"></i> Unfollow Non-Followers</h2>
+            <form data-task-form data-task-endpoint="unfollow_non_followers" class="mt-4">
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-comment"></i> Comment on Posts</h2>
+            <form data-task-form data-task-endpoint="comment_posts" class="mt-4 space-y-2">
+                <input type="text" name="comment" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Enter comment" required>
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-eye"></i> View Stories</h2>
+            <form data-task-form data-task-endpoint="view_stories" class="mt-4">
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+        <div class="box">
+            <h2 class="text-lg font-bold"><i class="fas fa-envelope"></i> DM New Followers</h2>
+            <form data-task-form data-task-endpoint="dm_followers" class="mt-4 space-y-2">
+                <input type="text" name="message" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Enter message" required>
+                <button type="submit" class="btn w-full">Start</button>
+            </form>
+        </div>
+    </div>
+    <div class="mt-8 box">
+        <div class="flex justify-between items-center">
+            <h2 class="text-lg font-bold"><i class="fas fa-tasks"></i> Task Status</h2>
+            <button id="stopTask" class="btn"><i class="fas fa-stop"></i> Stop Task</button>
+        </div>
+        <div id="taskStatus" class="mt-4 p-3 bg-gray-700 rounded">
+            <p>No task running</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
